@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tiempo Juntos</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+    #timer {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+    .message {
+      margin-top: 30px;
+      font-size: 1.2em;
+      color: #ff4d6d;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hemos estado juntos durante:</h1>
+  <div id="timer">Cargando...</div>
+  <div class="message">Gracias por cada segundo a tu lado ❤️</div>
+
+  <script>
+    const startDate = new Date('2022-04-29T00:00:00');
+
+    function updateTimer() {
+      const now = new Date();
+      let diff = now - startDate;
+
+      const seconds = Math.floor(diff / 1000) % 60;
+      const minutes = Math.floor(diff / (1000 * 60)) % 60;
+      const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
+      const daysTotal = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const years = Math.floor(daysTotal / 365.25);
+      const days = Math.floor(daysTotal % 365.25);
+
+      document.getElementById('timer').textContent =
+        `${years} años, ${days} días, ${hours} horas, ${minutes} minutos y ${seconds} segundos`;
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+  </script>
+</body>
+</html>
