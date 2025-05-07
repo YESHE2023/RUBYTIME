@@ -1,77 +1,75 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RubyTime 💖</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- Contador de tiempo -->
+  <div class="contador-box" id="contador"></div>
 
-  <div class="contador-box" id="contador">
-    ❤️ Han pasado <span id="dias"></span> días juntos.
+  <!-- Cuadros con botones -->
+  <div class="secciones">
+    <a href="carta.html" class="tarjeta">💌 Carta para ti</a>
+    <a href="recuerdos.html" class="tarjeta">📸 Nuestros recuerdos</a>
+    <a href="metas.html" class="tarjeta">🎯 Nuestras metas</a>
+    <a href="mensajes.html" class="tarjeta">💬 Mensajes</a>
   </div>
 
-  <div class="menu">
-    <a href="carta.html">Carta</a>
-    <a href="recuerdos.html">Recuerdos</a>
-    <a href="metas.html">Metas</a>
-    <a href="mensajes.html">Mensajes</a>
+  <!-- Contenedor de corazones -->
+  <div id="corazon-container"></div>
+
+  <!-- Cilindro de vidrio -->
+  <div id="cilindro">
+    <div id="corazones-acumulados"></div>
   </div>
 
-  <!-- Script para calcular días -->
   <script>
-    const inicio = new Date("2023-06-14T00:00:00");
-    const hoy = new Date();
-    const diasJuntos = Math.floor((hoy - inicio) / (1000 * 60 * 60 * 24));
-    document.getElementById("dias").innerText = diasJuntos;
-  </script>
+    const inicioRelacion = new Date("2023-07-15T00:00:00");
 
-  <!-- Fondo de burbujas -->
-  <script>
-    for (let i = 0; i < 20; i++) {
-      const burbuja = document.createElement("div");
-      burbuja.className = "burbuja";
-      burbuja.style.left = `${Math.random() * 100}vw`;
-      burbuja.style.width = `${20 + Math.random() * 60}px`;
-      burbuja.style.height = burbuja.style.width;
-      burbuja.style.animationDuration = `${10 + Math.random() * 20}s`;
-      document.body.appendChild(burbuja);
+    function actualizarContador() {
+      const ahora = new Date();
+      const diff = ahora - inicioRelacion;
+      const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutos = Math.floor((diff / (1000 * 60)) % 60);
+      const segundos = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("contador").innerHTML =
+        `❤️ Hemos estado juntos por ${dias} días, ${horas}h ${minutos}m ${segundos}s`;
     }
-  </script>
+    setInterval(actualizarContador, 1000);
+    actualizarContador();
 
-  <!-- Corazones cayendo -->
-  <script>
-    const inicioRelacion = new Date("2023-06-14T00:00:00");
-    const almacenadosKey = "corazonesAlmacenados";
-    const hoy = new Date();
-    const esMesiversario = hoy.getDate() === inicioRelacion.getDate();
-    const esAniversario = esMesiversario && hoy.getMonth() === inicioRelacion.getMonth();
+    // Crear corazones acumulados
+    const corazonAcumulado = document.getElementById("corazones-acumulados");
+    const minutosDesdeInicio = 954537; // Calculado previamente
 
-    function crearCorazon(almacenar = false) {
+    for (let i = 0; i < minutosDesdeInicio; i++) {
+      const span = document.createElement("span");
+      span.className = "corazon-pequeno";
+      span.innerHTML = "❤";
+      corazonAcumulado.appendChild(span);
+    }
+
+    // Corazón que cae cada minuto
+    function lanzarCorazon() {
       const corazon = document.createElement("div");
-      corazon.className = "corazon";
+      corazon.classList.add("corazon");
       corazon.innerHTML = "❤";
       corazon.style.left = Math.random() * 100 + "vw";
-      document.body.appendChild(corazon);
-      setTimeout(() => corazon.remove(), 6000);
 
-      if (almacenar) {
-        const total = parseInt(localStorage.getItem(almacenadosKey) || "0");
-        localStorage.setItem(almacenadosKey, total + 1);
-      }
+      document.getElementById("corazon-container").appendChild(corazon);
+
+      setTimeout(() => {
+        corazon.remove();
+      }, 6000);
     }
 
-    crearCorazon(true);
-    setInterval(() => crearCorazon(true), 60000); // Uno por minuto
-
-    if (esMesiversario && !esAniversario) {
-      setInterval(() => { for (let i = 0; i < 10; i++) crearCorazon(false); }, 1000);
-    }
-    if (esAniversario) {
-      setInterval(() => { for (let i = 0; i < 100; i++) crearCorazon(false); }, 1000);
-    }
+    setInterval(lanzarCorazon, 60000); // Cada minuto
+    lanzarCorazon(); // Lanza uno al inicio
   </script>
-
 </body>
 </html>
