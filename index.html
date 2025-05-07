@@ -71,20 +71,66 @@
     setInterval(updateTimer, 1000);
     updateTimer();
     src="script.js";
-    function crearCorazon() {
-     const corazon = document.createElement("div");
-     corazon.classList.add("corazon");
-     corazon.innerHTML = "❤";
-     corazon.style.left = Math.random() * 100 + "vw";
-     document.body.appendChild(corazon);
-     setTimeout(() => {
-       corazon.remove();
-     }, 6000);
-    }
-
-    // Lanza un corazón cada 60 segundos
-    crearCorazon(); // uno al cargar
-    setInterval(crearCorazon, 60000);
   </script>
+  <script>
+const inicioRelacion = new Date("2022-04-29T00:00:00"); // Ajusta tu fecha
+const ahora = new Date();
+const hoy = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate());
+const almacenadosKey = "corazonesAlmacenados";
+
+// Verifica si es mesiversario o aniversario
+const esMesiversario = hoy.getDate() === inicioRelacion.getDate();
+const esAniversario = esMesiversario && (hoy.getMonth() === inicioRelacion.getMonth());
+
+function crearCorazon(almacenar = false) {
+  const corazon = document.createElement("div");
+  corazon.classList.add("corazon");
+  corazon.innerHTML = "❤";
+  corazon.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(corazon);
+  setTimeout(() => corazon.remove(), 6000);
+
+  if (almacenar) {
+    let corazones = parseInt(localStorage.getItem(almacenadosKey)) || 0;
+    localStorage.setItem(almacenadosKey, corazones + 1);
+  }
+}
+
+// Mostrar corazón inicial y cada minuto
+crearCorazon(true);
+setInterval(() => crearCorazon(true), 60000); // 1 por minuto
+
+// Mesiversario: 10 corazones por segundo (solo por 24h)
+if (esMesiversario && !esAniversario) {
+  setInterval(() => {
+    for (let i = 0; i < 10; i++) crearCorazon(false);
+  }, 1000);
+}
+
+// Aniversario: 100 corazones por segundo
+if (esAniversario) {
+  setInterval(() => {
+    for (let i = 0; i < 100; i++) crearCorazon(false);
+  }, 1000);
+}
+
+// Mostrar cantidad almacenada si deseas (opcional)
+window.addEventListener("DOMContentLoaded", () => {
+  const total = localStorage.getItem(almacenadosKey);
+  if (total) {
+    const div = document.createElement("div");
+    div.style.position = "fixed";
+    div.style.bottom = "10px";
+    div.style.right = "10px";
+    div.style.background = "#fff";
+    div.style.padding = "6px 12px";
+    div.style.borderRadius = "8px";
+    div.style.boxShadow = "0 0 6px rgba(0,0,0,0.2)";
+    div.style.fontWeight = "bold";
+    div.innerText = `Corazones juntos: ${total}`;
+    document.body.appendChild(div);
+  }
+});
+</script>
 </body>
 </html>
