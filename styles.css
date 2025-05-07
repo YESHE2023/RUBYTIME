@@ -9,7 +9,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Fondo burbujeante opcional */
 body::before {
   content: "";
   position: fixed;
@@ -30,7 +29,6 @@ body::before {
   100% { background-position: 0 -1000px, 100% -1000px, 50% -1000px; }
 }
 
-/* Contador */
 .contador-box {
   background-color: #ffe6f0;
   padding: 15px 20px;
@@ -41,60 +39,91 @@ body::before {
   display: inline-block;
 }
 
-/* Cartas y contenido centrado */
-.carta-contenido {
-  max-width: 600px;
-  margin: 40px auto;
-  background-color: #fff0f5;
-  padding: 20px;
+.secciones {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  padding: 40px 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.tarjeta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffe6f0;
   border-radius: 20px;
-  box-shadow: 0 0 15px rgba(255, 182, 193, 0.4);
-  text-align: center;
-}
-
-/* Botones */
-.boton, .menu, .volver-btn, button {
-  background-color: #ffb6c1;
-  color: #fff;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 15px;
-  font-size: 16px;
+  padding: 30px 20px;
+  font-size: 18px;
   font-weight: bold;
-  cursor: pointer;
-  margin: 10px;
   text-decoration: none;
-  transition: background-color 0.3s, transform 0.2s;
+  color: #333;
+  box-shadow: 0 6px 15px rgba(255, 182, 193, 0.3);
+  transition: transform 0.2s, box-shadow 0.3s;
 }
 
-.boton:hover,
-.menu:hover,
-.volver-btn:hover,
-button:hover {
-  background-color: #ff90a9;
-  transform: scale(1.05);
+.tarjeta:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(255, 182, 193, 0.5);
 }
 
-/* Área de mensaje */
-textarea {
-  width: 90%;
-  max-width: 400px;
-  font-size: 16px;
+#corazon-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.corazon {
+  position: absolute;
+  top: -20px;
+  font-size: 24px;
+  color: red;
+  animation: caer 6s linear forwards;
+}
+
+@keyframes caer {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+#cilindro {
+  width: 100%;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  box-shadow: inset 0 4px 10px rgba(255, 182, 193, 0.5);
+  overflow-y: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
   padding: 10px;
-  border-radius: 10px;
-  border: 2px solid #ffc0cb;
-  background-color: #fffafc;
-  resize: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
 }
 
-/* Responsive */
+#corazones-acumulados span {
+  font-size: 14px;
+  margin: 2px;
+  color: red;
+  display: inline-block;
+}
+
 @media (max-width: 600px) {
   .contador-box {
     font-size: 16px;
   }
 
-  button, .menu, .volver-btn {
-    font-size: 14px;
-    padding: 10px 18px;
+  .tarjeta {
+    font-size: 16px;
+    padding: 20px;
   }
 }
