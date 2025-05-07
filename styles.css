@@ -1,30 +1,47 @@
+/* Fondo pastel con burbujas */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #fff0f5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  background: linear-gradient(to bottom, #ffe6f0, #fff0f5);
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
 }
 
-.carta-container {
-  background-color: #ffffff;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.burbuja {
+  position: fixed;
+  bottom: -100px;
+  background-color: rgba(255, 192, 203, 0.3);
+  border-radius: 50%;
+  animation: flotar 20s infinite ease-in;
+  z-index: 0;
+}
+
+@keyframes flotar {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-120vh) scale(1.2);
+    opacity: 0;
+  }
+}
+
+.contador-box {
+  background-color: rgba(255, 240, 250, 0.8);
+  border: 2px solid pink;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 1.5rem;
   text-align: center;
+  margin: 20px auto;
+  width: fit-content;
+  box-shadow: 0 4px 8px rgba(255, 182, 193, 0.4);
+  z-index: 10;
+  position: relative;
 }
 
-button {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  background-color: #ff69b4;
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
+/* Corazones */
 @keyframes caerCorazon {
   0% { top: -50px; opacity: 1; }
   100% { top: 100vh; opacity: 0; }
@@ -36,5 +53,30 @@ button {
   color: red;
   animation: caerCorazon 5s linear forwards;
   pointer-events: none;
-  z-index: 999;
+  z-index: 100;
+}
+
+/* Menú de navegación */
+.menu {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  z-index: 10;
+  position: relative;
+}
+
+.menu a {
+  background-color: #ffc0cb;
+  padding: 10px 20px;
+  border-radius: 15px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  transition: background 0.3s;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.menu a:hover {
+  background-color: #ff99aa;
 }
