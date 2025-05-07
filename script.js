@@ -9,8 +9,7 @@ function mostrarCarta() {
     boton.textContent = "Cerrar Carta";
     cartaMostrada = true;
   } else {
-    mensaje.textContent = "Haz clic en el botón para leer.";
-    boton.textContent = "Leer Carta";
-    cartaMostrada = false;
+    // Redirige a index.html
+    window.location.href = "index.html";
   }
 }
