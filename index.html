@@ -3,149 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RUBY ❤️</title>
-  <link rel="icon" type="image/png" href="https://w7.pngwing.com/pngs/184/451/png-transparent-pixel-heart-thumbnail.png">
-  <style>
-    body {
-      background-color: #000;
-      color: #fff;
-      font-family: 'Arial', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 40px 20px;
-      min-height: 100vh;
-      box-sizing: border-box;
-    }
-    h1 {
-      font-size: 2em;
-      margin-bottom: 20px;
-    }
-    #timer {
-      font-size: 1.5em;
-      font-weight: bold;
-    }
-    .message {
-      margin-top: 30px;
-      font-size: 1.2em;
-      color: #ff4d6d;
-    }
-    h2 {
-      margin-top: 30px;
-      font-size: 1.2em;
-      color: #fff
-    }
-  </style>
-  <style>
-/* Corazones en caída */
-.corazon {
-  position: fixed;
-  top: -30px;
-  width: 24px;
-  height: 24px;
-  background: url('https://emojiapi.dev/api/v1/2764.png') no-repeat center/contain;
-  animation: caerCorazon 5s ease-in forwards;
-  pointer-events: none;
-  z-index: 999;
-}
-
-/* Animación corregida con desvanecimiento */
-@keyframes caerCorazon {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(calc(100vh - 50px));
-    opacity: 0;
-  }
-}
-
-/* Contenedor de acumulación al fondo */
-#acumulacion {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  min-height: 50px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-end;
-  padding: 10px;
-  z-index: 998;
-}
-
-/* Corazones acumulados */
-.corazon-acumulado {
-  width: 24px;
-  height: 24px;
-  background: url('https://emojiapi.dev/api/v1/2764.png') no-repeat center/contain;
-  margin: 2px;
-}
-</style>
+  <title>RubyTime 💖</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Hemos estado juntos durante:</h1>
-  <div id="timer">Cargando...</div>
-  <div style="margin-top: 20px; text-align: center;">
-  <a href="carta.html" style="color: #ff69b4; font-weight: bold; text-decoration: none;">
-    Leer carta 💌 
-  </a>
-</div>
-  <h2>Te amo Ruby <3</h2>
-  <div class="message">Siempre estaré aquí para tí :3</div>
-  <div id="acumulacion"></div>
 
+  <div class="contador-box" id="contador">
+    ❤️ Han pasado <span id="dias"></span> días juntos.
+  </div>
+
+  <div class="menu">
+    <a href="carta.html">Carta</a>
+    <a href="recuerdos.html">Recuerdos</a>
+    <a href="metas.html">Metas</a>
+    <a href="mensajes.html">Mensajes</a>
+  </div>
+
+  <!-- Script para calcular días -->
   <script>
-    const startDate = new Date('2022-04-29T00:00:00');
+    const inicio = new Date("2023-06-14T00:00:00");
+    const hoy = new Date();
+    const diasJuntos = Math.floor((hoy - inicio) / (1000 * 60 * 60 * 24));
+    document.getElementById("dias").innerText = diasJuntos;
+  </script>
 
-    function updateTimer() {
-      const now = new Date();
-      let diff = now - startDate;
+  <!-- Fondo de burbujas -->
+  <script>
+    for (let i = 0; i < 20; i++) {
+      const burbuja = document.createElement("div");
+      burbuja.className = "burbuja";
+      burbuja.style.left = `${Math.random() * 100}vw`;
+      burbuja.style.width = `${20 + Math.random() * 60}px`;
+      burbuja.style.height = burbuja.style.width;
+      burbuja.style.animationDuration = `${10 + Math.random() * 20}s`;
+      document.body.appendChild(burbuja);
+    }
+  </script>
 
-      const seconds = Math.floor(diff / 1000) % 60;
-      const minutes = Math.floor(diff / (1000 * 60)) % 60;
-      const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
-      const daysTotal = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const years = Math.floor(daysTotal / 365.25);
-      const days = Math.floor(daysTotal % 365.25);
+  <!-- Corazones cayendo -->
+  <script>
+    const inicioRelacion = new Date("2023-06-14T00:00:00");
+    const almacenadosKey = "corazonesAlmacenados";
+    const hoy = new Date();
+    const esMesiversario = hoy.getDate() === inicioRelacion.getDate();
+    const esAniversario = esMesiversario && hoy.getMonth() === inicioRelacion.getMonth();
 
-      document.getElementById('timer').textContent =
-        `${years} años, ${days} días, ${hours} horas, ${minutes} minutos y ${seconds} segundos`;
+    function crearCorazon(almacenar = false) {
+      const corazon = document.createElement("div");
+      corazon.className = "corazon";
+      corazon.innerHTML = "❤";
+      corazon.style.left = Math.random() * 100 + "vw";
+      document.body.appendChild(corazon);
+      setTimeout(() => corazon.remove(), 6000);
+
+      if (almacenar) {
+        const total = parseInt(localStorage.getItem(almacenadosKey) || "0");
+        localStorage.setItem(almacenadosKey, total + 1);
+      }
     }
 
-    setInterval(updateTimer, 1000);
-    updateTimer();
+    crearCorazon(true);
+    setInterval(() => crearCorazon(true), 60000); // Uno por minuto
+
+    if (esMesiversario && !esAniversario) {
+      setInterval(() => { for (let i = 0; i < 10; i++) crearCorazon(false); }, 1000);
+    }
+    if (esAniversario) {
+      setInterval(() => { for (let i = 0; i < 100; i++) crearCorazon(false); }, 1000);
+    }
   </script>
-  <script>
-function crearCorazon() {
-  const corazon = document.createElement("div");
-  corazon.classList.add("corazon");
-
-  // Posición aleatoria en la parte superior
-  const posicionX = Math.random() * window.innerWidth;
-  corazon.style.left = `${posicionX}px`;
-
-  document.body.appendChild(corazon);
-
-  // Cuando termine de caer, se transfiere al contenedor de acumulación
-  corazon.addEventListener('animationend', () => {
-    const contenedor = document.querySelector("#acumulacion");
-    corazon.classList.remove("corazon");
-    corazon.classList.add("corazon-acumulado");
-    corazon.style = ""; // limpia estilos inline
-    contenedor.appendChild(corazon);
-  });
-}
-
-// Cada minuto (puedes cambiar 60000 por 1000 para pruebas rápidas)
-setInterval(crearCorazon, 60000); //Modifica este valor para controlar la frecuencia
-</script>
 
 </body>
 </html>
