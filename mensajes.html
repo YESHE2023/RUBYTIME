@@ -12,12 +12,24 @@
   </div>
 
   <div style="text-align:center; margin-top: 20px;">
-    <p>Aquí pueden dejarse mensajes bonitos el uno al otro. 📝</p>
-    <textarea rows="6" cols="40" placeholder="Escribe tu mensaje aquí..." style="border-radius: 10px; padding: 10px;"></textarea><br><br>
-    <button style="background-color: pink; border: none; padding: 10px 20px; border-radius: 10px;">Guardar Mensaje</button>
-    <p style="margin-top: 20px;">(En el futuro se puede hacer que se guarden con JavaScript o en base de datos)</p>
+    <p>Escríbeme algo bonito y mándamelo por WhatsApp 💖</p>
+    <textarea id="mensaje" rows="6" cols="40" placeholder="Escribe tu mensaje aquí..." style="border-radius: 10px; padding: 10px;"></textarea><br><br>
+    <button onclick="enviarMensaje()" style="background-color: pink; border: none; padding: 10px 20px; border-radius: 10px;">Enviar por WhatsApp</button>
     <a class="menu" href="index.html">Volver al inicio</a>
   </div>
+
+  <script>
+    function enviarMensaje() {
+      const texto = document.getElementById("mensaje").value.trim();
+      if (texto.length === 0) {
+        alert("Escribe algo primero 💌");
+        return;
+      }
+      const numero = "51906464923"; // Tu número sin el "+"
+      const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
+      window.open(url, "_blank");
+    }
+  </script>
 
 </body>
 </html>
