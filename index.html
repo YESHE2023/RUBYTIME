@@ -38,6 +38,36 @@
       color: #fff
     }
   </style>
+  <style>
+.corazon {
+  position: fixed;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  background: url('https://emojiapi.dev/api/v1/2764.png') no-repeat center/contain;
+  animation: caerCorazon 5s linear forwards;
+  pointer-events: none;
+  z-index: 999;
+}
+
+@keyframes caerCorazon {
+  0% {
+    transform: translateY(-50px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(calc(100vh - 30px));
+    opacity: 1;
+  }
+}
+
+.corazon.acumulado {
+  animation: none;
+  position: absolute;
+  top: unset;
+  bottom: 0;
+}
+</style>
 </head>
 <body>
   <h1>Hemos estado juntos durante:</h1>
