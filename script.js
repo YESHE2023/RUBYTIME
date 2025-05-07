@@ -9,7 +9,10 @@ function mostrarCarta() {
     boton.textContent = "Cerrar Carta";
     cartaMostrada = true;
   } else {
-    // Redirige a index.html
-    window.location.href = "index.html";
+    document.body.style.transition = "opacity 1s";
+    document.body.style.opacity = 0;
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 1000); // espera 1 segundo antes de redirigir
   }
 }
