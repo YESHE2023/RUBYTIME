@@ -39,33 +39,53 @@
     }
   </style>
   <style>
+/* Corazones en caída */
 .corazon {
   position: fixed;
-  top: 0;
+  top: -30px;
   width: 24px;
   height: 24px;
   background: url('https://emojiapi.dev/api/v1/2764.png') no-repeat center/contain;
-  animation: caerCorazon 5s linear forwards;
+  animation: caerCorazon 5s ease-in forwards;
   pointer-events: none;
   z-index: 999;
 }
 
+/* Animación corregida con desvanecimiento */
 @keyframes caerCorazon {
   0% {
-    transform: translateY(-50px);
+    transform: translateY(0);
+    opacity: 1;
+  }
+  90% {
     opacity: 1;
   }
   100% {
-    transform: translateY(calc(100vh - 30px));
-    opacity: 1;
+    transform: translateY(calc(100vh - 50px));
+    opacity: 0;
   }
 }
 
-.corazon.acumulado {
-  animation: none;
-  position: absolute;
-  top: unset;
+/* Contenedor de acumulación al fondo */
+#acumulacion {
+  position: fixed;
   bottom: 0;
+  width: 100%;
+  min-height: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 10px;
+  z-index: 998;
+}
+
+/* Corazones acumulados */
+.corazon-acumulado {
+  width: 24px;
+  height: 24px;
+  background: url('https://emojiapi.dev/api/v1/2764.png') no-repeat center/contain;
+  margin: 2px;
 }
 </style>
 </head>
@@ -79,6 +99,7 @@
 </div>
   <h2>Te amo Ruby <3</h2>
   <div class="message">Siempre estaré aquí para tí :3</div>
+  <div id="acumulacion"></div>
 
   <script>
     const startDate = new Date('2022-04-29T00:00:00');
@@ -107,23 +128,25 @@ function crearCorazon() {
   const corazon = document.createElement("div");
   corazon.classList.add("corazon");
 
-  // Posición aleatoria horizontal
+  // Posición aleatoria en la parte superior
   const posicionX = Math.random() * window.innerWidth;
   corazon.style.left = `${posicionX}px`;
 
   document.body.appendChild(corazon);
 
-  // Eliminar el corazón cuando termine la animación
+  // Cuando termine de caer, se transfiere al contenedor de acumulación
   corazon.addEventListener('animationend', () => {
-    corazon.classList.add('acumulado'); // Se acumula al fondo
+    const contenedor = document.querySelector("#acumulacion");
+    corazon.classList.remove("corazon");
+    corazon.classList.add("corazon-acumulado");
+    corazon.style = ""; // limpia estilos inline
+    contenedor.appendChild(corazon);
   });
 }
 
-// Cada minuto (60000ms)
+// Cada minuto (puedes cambiar 60000 por 1000 para pruebas rápidas)
 setInterval(crearCorazon, 60000);
-
-// También puedes llamar una vez al cargar para ver uno de prueba
-// crearCorazon();
 </script>
+
 </body>
 </html>
