@@ -7,23 +7,16 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Contador de tiempo -->
+
+  <!-- Contador en la parte superior -->
   <div class="contador-box" id="contador"></div>
 
-  <!-- Cuadros con botones -->
-  <div class="secciones">
-    <a href="carta.html" class="tarjeta">💌 Carta para ti</a>
-    <a href="recuerdos.html" class="tarjeta">📸 Nuestros recuerdos</a>
-    <a href="metas.html" class="tarjeta">🎯 Nuestras metas</a>
-    <a href="mensajes.html" class="tarjeta">💬 Mensajes</a>
-  </div>
-
-  <!-- Contenedor de corazones -->
-  <div id="corazon-container"></div>
-
-  <!-- Cilindro de vidrio -->
-  <div id="cilindro">
-    <div id="corazones-acumulados"></div>
+  <!-- Cuadros con botones en dos columnas -->
+  <div class="grid-botones">
+    <a href="carta.html" class="boton-principal">💌 Carta</a>
+    <a href="recuerdos.html" class="boton-principal">📸 Recuerdos</a>
+    <a href="metas.html" class="boton-principal">🎯 Metas</a>
+    <a href="mensajes.html" class="boton-principal">💬 Mensajes</a>
   </div>
 
   <script>
@@ -32,44 +25,19 @@
     function actualizarContador() {
       const ahora = new Date();
       const diff = ahora - inicioRelacion;
+
       const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
       const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
       const minutos = Math.floor((diff / (1000 * 60)) % 60);
       const segundos = Math.floor((diff / 1000) % 60);
 
       document.getElementById("contador").innerHTML =
-        `❤️ Hemos estado juntos por ${dias} días, ${horas}h ${minutos}m ${segundos}s`;
+        `❤️ Juntos por ${dias} días, ${horas}h ${minutos}m ${segundos}s`;
     }
+
     setInterval(actualizarContador, 1000);
     actualizarContador();
-
-    // Crear corazones acumulados
-    const corazonAcumulado = document.getElementById("corazones-acumulados");
-    const minutosDesdeInicio = 954537; // Calculado previamente
-
-    for (let i = 0; i < minutosDesdeInicio; i++) {
-      const span = document.createElement("span");
-      span.className = "corazon-pequeno";
-      span.innerHTML = "❤";
-      corazonAcumulado.appendChild(span);
-    }
-
-    // Corazón que cae cada minuto
-    function lanzarCorazon() {
-      const corazon = document.createElement("div");
-      corazon.classList.add("corazon");
-      corazon.innerHTML = "❤";
-      corazon.style.left = Math.random() * 100 + "vw";
-
-      document.getElementById("corazon-container").appendChild(corazon);
-
-      setTimeout(() => {
-        corazon.remove();
-      }, 6000);
-    }
-
-    setInterval(lanzarCorazon, 60000); // Cada minuto
-    lanzarCorazon(); // Lanza uno al inicio
   </script>
+
 </body>
 </html>
