@@ -1,73 +1,35 @@
 body {
   margin: 0;
-  padding: 0;
   font-family: 'Comic Sans MS', cursive, sans-serif;
-  background: linear-gradient(to bottom, #ffe4ec, #ffeef7);
-  color: #333;
-  text-align: center;
-  min-height: 100vh;
+  background-color: #ffeef8;
+  color: #444;
   overflow-x: hidden;
 }
 
-/* Contador arriba */
-.contador-box {
-  background-color: #ffe6f0;
-  padding: 15px 20px;
-  margin-top: 20px;
-  border-radius: 20px;
-  box-shadow: 0 4px 10px rgba(255, 182, 193, 0.3);
-  font-size: 20px;
-  display: inline-block;
-}
-
-/* Cuadrícula de 2x2 */
-.grid-botones {
+.botones-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 20px;
-  padding: 40px 20px;
-  max-width: 600px;
-  margin: 0 auto;
+  padding: 50px 20px;
 }
 
-/* Botones principales */
 .boton-principal {
-  background-color: #ffb6c1;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  padding: 40px 0;
-  font-size: 18px;
-  font-weight: bold;
+  display: block;
+  padding: 15px;
+  background: #ffd6e8;
+  color: #8b005d;
+  text-align: center;
   text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100px;
-  box-shadow: 0 6px 15px rgba(255, 182, 193, 0.3);
-  transition: transform 0.2s, box-shadow 0.3s;
+  font-size: 18px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
 }
 
 .boton-principal:hover {
-  background-color: #ff90a9;
   transform: scale(1.05);
 }
 
-/* Responsive para una sola columna en pantallas chicas */
-@media (max-width: 500px) {
-  .grid-botones {
-    grid-template-columns: 1fr;
-  }
-
-  .boton-principal {
-    height: 80px;
-    font-size: 16px;
-  }
-
-  .contador-box {
-    font-size: 16px;
-  }
-  /* ==== CARTA Y DEMÁS PÁGINAS ==== */
 .contenido-carta {
   max-width: 600px;
   margin: 80px auto 40px auto;
@@ -77,27 +39,7 @@ body {
   box-shadow: 0 6px 20px rgba(255, 182, 193, 0.3);
   font-size: 18px;
   line-height: 1.6;
-}
-
-/* Botón de volver con estilo pastel */
-.volver-btn {
-  display: inline-block;
-  margin-top: 30px;
-}
-
-/* ==== BURBUJAS DE CORAZÓN SOLO PARA INDEX ==== */
-@keyframes subir {
-  0% {
-    transform: translateY(100vh) scale(1);
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-100vh) scale(1.2);
-    opacity: 0;
-  }
+  text-align: center;
 }
 
 .burbujas-container {
@@ -107,26 +49,47 @@ body {
   width: 100%;
   height: 100%;
   z-index: -1;
-  overflow: hidden;
   pointer-events: none;
+  overflow: hidden;
 }
 
 .burbuja {
   position: absolute;
   width: 30px;
   height: 30px;
-  background-image: url('—Pngtree—pink heart shape transparent bubble_9170989.png'); /* Requiere una imagen de corazón pequeña */
+  background-image: url('https://cdn-icons-png.flaticon.com/512/833/833472.png');
   background-size: cover;
   animation: subir linear infinite;
-  opacity: 0;
+  opacity: 0.7;
 }
 
-/* Genera muchas columnas para burbujas */
-@media (max-width: 500px) {
-  .burbuja {
-    width: 20px;
-    height: 20px;
+@keyframes subir {
+  0% {
+    transform: translateY(100vh) scale(1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1.2);
+    opacity: 0;
   }
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+textarea {
+  resize: none;
+  height: 120px;
+  padding: 15px;
+  border-radius: 15px;
+  border: 1px solid #ffc0cb;
+  font-size: 16px;
+  font-family: inherit;
+  background-color: #fffafc;
 }
