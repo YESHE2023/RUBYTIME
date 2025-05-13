@@ -1,35 +1,27 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Mensajes 💌</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💬 Mensajes</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
-  <div class="contador-box">
-    💕 Mensajes entre nosotros
+  <div class="contenido-carta">
+    <h1>💬 Deja tu mensaje</h1>
+    <p>Escribe un mensaje especial para mí y envíalo directamente a mi WhatsApp.</p>
+    <form id="mensajeForm">
+      <textarea id="mensaje" placeholder="Tu mensaje aquí..." required></textarea>
+      <button type="submit" class="boton-principal">Enviar por WhatsApp</button>
+    </form>
+    <a href="index.html" class="boton-principal volver-btn">Volver al inicio</a>
   </div>
-
-  <div style="text-align:center; margin-top: 20px;">
-    <p>Escríbeme algo bonito y mándamelo por WhatsApp 💖</p>
-    <textarea id="mensaje" rows="6" cols="40" placeholder="Escribe tu mensaje aquí..." style="border-radius: 10px; padding: 10px;"></textarea><br><br>
-    <button onclick="enviarMensaje()" style="background-color: pink; border: none; padding: 10px 20px; border-radius: 10px;">Enviar por WhatsApp</button>
-    <a class="volver-btn" href="index.html">Volver al inicio</a>
-  </div>
-
   <script>
-    function enviarMensaje() {
-      const texto = document.getElementById("mensaje").value.trim();
-      if (texto.length === 0) {
-        alert("Escribe algo primero 💌");
-        return;
-      }
-      const numero = "51906464923"; // Tu número sin el "+"
-      const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
-      window.open(url, "_blank");
-    }
+    document.getElementById("mensajeForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const mensaje = encodeURIComponent(document.getElementById("mensaje").value);
+      window.location.href = `https://wa.me/51906464923?text=${mensaje}`;
+    });
   </script>
-
 </body>
 </html>
