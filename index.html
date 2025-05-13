@@ -3,41 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ruby 💖</title>
+  <title>Ruby Time 💖</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div class="burbujas-container"></div>
 
-  <!-- Contador en la parte superior -->
-  <div class="contador-box" id="contador"></div>
-
-  <!-- Cuadros con botones en dos columnas -->
-  <div class="grid-botones">
-    <a href="carta.html" class="boton-principal">💌 Carta</a>
-    <a href="recuerdos.html" class="boton-principal">📸 Recuerdos</a>
-    <a href="metas.html" class="boton-principal">🎯 Metas</a>
-    <a href="mensajes.html" class="boton-principal">💬 Mensajes</a>
-  </div>
+  <main class="botones-grid">
+    <a href="carta.html" class="boton-principal">Leer Carta 💌</a>
+    <a href="mensajes.html" class="boton-principal">Mensajes 💬</a>
+    <a href="recuerdos.html" class="boton-principal">Recuerdos 📸</a>
+    <a href="metas.html" class="boton-principal">Metas 🎯</a>
+  </main>
 
   <script>
-    const inicioRelacion = new Date("2023-07-15T00:00:00");
-
-    function actualizarContador() {
-      const ahora = new Date();
-      const diff = ahora - inicioRelacion;
-
-      const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutos = Math.floor((diff / (1000 * 60)) % 60);
-      const segundos = Math.floor((diff / 1000) % 60);
-
-      document.getElementById("contador").innerHTML =
-        `❤️ Juntos por ${dias} días, ${horas}h ${minutos}m ${segundos}s`;
+    const container = document.querySelector('.burbujas-container');
+    for (let i = 0; i < 30; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'burbuja';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 5 + Math.random() * 5 + 's';
+      heart.style.animationDelay = Math.random() * 5 + 's';
+      container.appendChild(heart);
     }
-
-    setInterval(actualizarContador, 1000);
-    actualizarContador();
   </script>
-
 </body>
 </html>
