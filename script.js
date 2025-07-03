@@ -59,8 +59,8 @@ body.addEventListener('click', (e) => {
 
     // Crear varios "te amo"s alrededor del punto del clic para la "lluvia"
     for (let i = 0; i < 10; i++) { // Puedes ajustar la cantidad de 'te amo's que aparecen
-        const randomX = x + (Math.random() - 0.5) * 100; // Un poco dispersos
-        const randomY = y + (Math.random() - 0.5) * 100;
+        const randomX = x + (Math.random() - 0.5) * 50; // Un poco dispersos
+        const randomY = y + (Math.random() - 0.5) * 50;
         setTimeout(() => createTeAmo(randomX, randomY), i * 50); // Aparecen con un pequeño retardo
     }
 });
