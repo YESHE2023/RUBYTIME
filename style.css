@@ -1,0 +1,84 @@
+body {
+    margin: 0;
+    overflow: hidden; /* Oculta barras de desplazamiento si los 'te amo's salen de la pantalla */
+    background-color: #000; /* Fondo negro */
+    color: #FF69B4; /* Rosa para los textos */
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* Fuente a mi criterio: divertida y legible */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Altura mínima de la ventana del navegador */
+    cursor: pointer; /* Indica que la pantalla es interactiva */
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#ruby-name {
+    font-size: 15vw; /* Tamaño de letra que se ajusta a la pantalla */
+    position: relative;
+    z-index: 10; /* Asegura que 'Ruby' esté por encima de los 'te amo's */
+    text-shadow: 0 0 10px #FF1493, 0 0 20px #FF1493, 0 0 30px #FF1493; /* Efecto de brillo rosado */
+    animation: pulse 2s infinite alternate; /* Animación de pulsación para Ruby */
+}
+
+/* Animación de pulsación para Ruby */
+@keyframes pulse {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.05);
+    }
+}
+
+.te-amo {
+    position: absolute;
+    font-size: 3vw; /* Tamaño inicial del texto 'te amo' */
+    opacity: 0;
+    transform: scale(0.5);
+    pointer-events: none; /* Permite hacer clic a través del texto */
+    text-shadow: 0 0 5px #FF1493; /* Sombra rosada para los 'te amo's */
+}
+
+/* Animación para los 'te amo's (caída y explosión) */
+@keyframes fallAndFade {
+    0% {
+        transform: translateY(-50px) scale(0.5);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    80% {
+        opacity: 1;
+        transform: translateY(500px) scale(1.5); /* Caída más larga */
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(700px) scale(2); /* Se desvanece y crece al final */
+    }
+}
+
+.explode {
+    animation: explodeEffect 0.5s forwards; /* Animación de explosión */
+}
+
+@keyframes explodeEffect {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2.5); /* Crece rápidamente */
+        opacity: 0; /* Desaparece */
+        filter: blur(5px); /* Desenfoque */
+    }
+}
