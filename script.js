@@ -27,7 +27,7 @@ function createTeAmo(x, y) {
 function explodeTeAmo(x, y) {
     const explosionElement = document.createElement('span');
     explosionElement.classList.add('te-amo', 'explode'); // Reutilizamos la clase te-amo para el estilo básico
-    explosionElement.textContent = '💖'; // Puedes cambiar esto por '✨' o '💥'
+    explosionElement.textContent = '❤️‍🔥'; // Puedes cambiar esto por '✨' o '💥'
     explosionElement.style.left = `${x}px`;
     explosionElement.style.top = `${y}px`;
     explosionElement.style.fontSize = '8vw'; // Tamaño grande para la explosión
@@ -58,7 +58,7 @@ body.addEventListener('click', (e) => {
     explodeTeAmo(x, y);
 
     // Crear varios "te amo"s alrededor del punto del clic para la "lluvia"
-    for (let i = 0; i < 5; i++) { // Puedes ajustar la cantidad de 'te amo's que aparecen
+    for (let i = 0; i < 10; i++) { // Puedes ajustar la cantidad de 'te amo's que aparecen
         const randomX = x + (Math.random() - 0.5) * 200; // Un poco dispersos
         const randomY = y + (Math.random() - 0.5) * 200;
         setTimeout(() => createTeAmo(randomX, randomY), i * 50); // Aparecen con un pequeño retardo
@@ -85,4 +85,4 @@ function generateRandomTeAmo() {
 }
 
 // Generar 'te amo's de fondo cada cierto tiempo (lluvia pasiva)
-setInterval(generateRandomTeAmo, 1000); // Cada 1 segundo, aparece un 'te amo' de forma aleatoria
+setInterval(generateRandomTeAmo, 100); // Cada 1 segundo, aparece un 'te amo' de forma aleatoria
