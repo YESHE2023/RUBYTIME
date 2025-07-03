@@ -85,4 +85,4 @@ function generateRandomTeAmo() {
 }
 
 // Generar 'te amo's de fondo cada cierto tiempo (lluvia pasiva)
-setInterval(generateRandomTeAmo, 500); // Cada 1 segundo, aparece un 'te amo' de forma aleatoria
+setInterval(generateRandomTeAmo, 1); // Cada 1 segundo, aparece un 'te amo' de forma aleatoria
