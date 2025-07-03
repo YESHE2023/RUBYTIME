@@ -1,31 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ruby Time 💖</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Para mi Ruby!</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="burbujas-container"></div>
+    <div class="container">
+        <h1 id="ruby-name">Ruby</h1>
+    </div>
 
-  <main class="botones-grid">
-    <a href="carta.html" class="boton-principal">Leer Carta 💌</a>
-    <a href="mensajes.html" class="boton-principal">Mensajes 💬</a>
-    <a href="recuerdos.html" class="boton-principal">Recuerdos 📸</a>
-    <a href="metas.html" class="boton-principal">Metas 🎯</a>
-  </main>
+    <audio id="explosion-sound" src="explosion.mp3" preload="auto"></audio>
 
-  <script>
-    const container = document.querySelector('.burbujas-container');
-    for (let i = 0; i < 30; i++) {
-      const heart = document.createElement('div');
-      heart.className = 'burbuja';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = 5 + Math.random() * 5 + 's';
-      heart.style.animationDelay = Math.random() * 5 + 's';
-      container.appendChild(heart);
-    }
-  </script>
+    <script src="script.js"></script>
 </body>
 </html>
