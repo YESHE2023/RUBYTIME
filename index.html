@@ -3,16 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruby ❤️</title>
-    <link rel="stylesheet" href="style.css">
+    <title>¡El Gran Reencuentro! ❤️</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to right, #ff7e5f, #feb47b); /* Fondo con gradiente */
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+            padding: 40px 60px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            max-width: 90%;
+        }
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        #countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Espacio entre los bloques de tiempo */
+            margin-top: 30px;
+            flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+        }
+
+        .time-box {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 20px 30px;
+            border-radius: 10px;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 3.5em; /* Tamaño de los números */
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .time-box div {
+            font-size: 1.2em; /* Tamaño de las etiquetas de texto */
+            margin-top: 5px;
+            opacity: 0.8;
+        }
+
+        #message {
+            font-size: 2em;
+            margin-top: 40px;
+            font-weight: bold;
+            color: #a8dadc; /* Un color suave para el mensaje final */
+            display: none; /* Oculto inicialmente */
+        }
+
+        .footer-text {
+            margin-top: 50px;
+            font-size: 1em;
+            opacity: 0.7;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            .time-box {
+                padding: 15px 20px;
+                min-width: 100px;
+            }
+            .time-box span {
+                font-size: 2.8em;
+            }
+            .time-box div {
+                font-size: 1em;
+            }
+            #message {
+                font-size: 1.5em;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1 id="ruby-name">Ruby</h1>
+        <h1>¡Cuenta regresiva para nuestro reencuentro!</h1>
+        <p>El momento en el que nuestros caminos se volverán a unir:</p>
+
+        <div id="countdown">
+            <div class="time-box"><span id="days">00</span><div>Días</div></div>
+            <div class="time-box"><span id="hours">00</span><div>Horas</div></div>
+            <div class="time-box"><span id="minutes">00</span><div>Minutos</div></div>
+            <div class="time-box"><span id="seconds">00</span><div>Segundos</div></div>
+        </div>
+
+        <p id="message">¡Llegó el día! ¡Es hora de reencontrarse! ❤️</p>
+        <p class="footer-text">"La distancia es solo una prueba de cuánto puede viajar el amor."</p>
     </div>
 
-    <audio id="explosion-sound" src="explosion.mp3" preload="auto"></audio>
+    <script>
+        // Establece la fecha y hora objetivo del reencuentro
+        // Año, Mes (0-11), Día, Hora, Minutos, Segundos
+        // Lima/Perú está en UTC-5. JavaScript Date object maneja esto automáticamente si no especificas una zona horaria.
+        const targetDate = new Date(2026, 2, 26, 20, 0, 0).getTime(); // Marzo es el mes 2 (0-indexado)
 
-    <script src="script.js"></script>
+        const countdownElement = document.getElementById('countdown');
+        const messageElement = document.getElementById('message');
+        const daysElement = document.getElementById('days');
+        const hoursElement = document.getElementById('hours');
+        const minutesElement = document.getElementById('minutes');
+        const secondsElement = document.getElementById('seconds');
+
+        function updateCountdown() {
+            const now = new Date().getTime(); // Obtiene la fecha y hora actual
+            const distance = targetDate - now; // Calcula la diferencia en milisegundos
+
+            // Si la cuenta regresiva ha terminado
+            if (distance < 0) {
+                clearInterval(countdownInterval); // Detiene el contador
+                countdownElement.style.display = 'none'; // Oculta los números
+                messageElement.style.display = 'block'; // Muestra el mensaje final
+                return;
+            }
+
+            // Cálculos para días, horas, minutos y segundos
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Actualiza el HTML con los nuevos valores, añadiendo un cero inicial si es necesario
+            daysElement.textContent = String(days).padStart(2, '0');
+            hoursElement.textContent = String(hours).padStart(2, '0');
+            minutesElement.textContent = String(minutes).padStart(2, '0');
+            secondsElement.textContent = String(seconds).padStart(2, '0');
+        }
+
+        // Llama a updateCountdown cada segundo
+        const countdownInterval = setInterval(updateCountdown, 1000);
+
+        // Llama a updateCountdown una vez al inicio para evitar un retardo de 1 segundo
+        updateCountdown();
+    </script>
 </body>
 </html>
