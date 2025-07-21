@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡El Gran Reencuentro! ❤️</title>
+    <title>Ruby ❤️</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -12,7 +12,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: linear-gradient(to right, #ff7e5f, #feb47b); /* Fondo con gradiente */
+            background: #000000; /* Fondo negro puro */
             color: white;
             text-align: center;
             margin: 0;
@@ -21,7 +21,7 @@
         }
 
         .container {
-            background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+            background-color: rgba(255, 105, 180, 0.7); /* Rosa vibrante con 70% de opacidad */
             padding: 40px 60px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
@@ -68,7 +68,7 @@
             font-size: 2em;
             margin-top: 40px;
             font-weight: bold;
-            color: #a8dadc; /* Un color suave para el mensaje final */
+            color: #ffb6c1; /* Un color rosa suave (Light Pink) para el mensaje final */
             display: none; /* Oculto inicialmente */
         }
 
@@ -101,8 +101,8 @@
 </head>
 <body>
     <div class="container">
-        <h1>¡Cuenta regresiva para nuestro reencuentro!</h1>
-        <p>El momento en el que nuestros caminos se volverán a unir:</p>
+        <h1>¡Nos vemos pronto!</h1>
+        <p>Esperaré con ansias por:</p>
 
         <div id="countdown">
             <div class="time-box"><span id="days">00</span><div>Días</div></div>
@@ -111,7 +111,10 @@
             <div class="time-box"><span id="seconds">00</span><div>Segundos</div></div>
         </div>
 
-        <p id="message">¡Llegó el día! ¡Es hora de reencontrarse! ❤️</p>
+        <p id="message">
+            ¡Llegó el día! ¡Nos vemos en Plaza Norte piso 3! ❤️<br>
+            <a id="meetingLink" href="https://maps.app.goo.gl/m4cnKAUcsRAsASs7A" target="_blank" style="color: #FFD700; text-decoration: none; font-size: 0.8em; display: none;"> Ingresa al enlace </a>
+        </p>
         <p class="footer-text">"La distancia es solo una prueba de cuánto puede viajar el amor."</p>
     </div>
 
@@ -119,43 +122,77 @@
         // Establece la fecha y hora objetivo del reencuentro
         // Año, Mes (0-11), Día, Hora, Minutos, Segundos
         // Lima/Perú está en UTC-5. JavaScript Date object maneja esto automáticamente si no especificas una zona horaria.
-        const targetDate = new Date(2026, 2, 26, 20, 0, 0).getTime(); // Marzo es el mes 2 (0-indexado)
-
+        // ... (resto de tu código JavaScript) ...
+        // Establece la fecha y hora EXACTA del reencuentro (final de la cuenta regresiva)
+        const finalMeetingTime = new Date(2026, 2, 26, 20, 0, 0).getTime(); // Marzo es el mes 2 (0-indexado), 20:00
+        
+        // Establece el inicio del día del reencuentro (cuando el mensaje debe empezar a mostrarse)
+        const startMeetingDay = new Date(2026, 2, 26, 0, 0, 0).getTime(); // 26 de marzo a las 00:00:00
+        
         const countdownElement = document.getElementById('countdown');
         const messageElement = document.getElementById('message');
+        const meetingLinkElement = document.getElementById('meetingLink'); // Obtener el elemento del enlace
+        
         const daysElement = document.getElementById('days');
         const hoursElement = document.getElementById('hours');
-        const minutesElement = document.getElementById('minutes');
+        const minutesElement = document('minutes'); // Esto debería ser getElementById
         const secondsElement = document.getElementById('seconds');
-
+        
+        
         function updateCountdown() {
             const now = new Date().getTime(); // Obtiene la fecha y hora actual
-            const distance = targetDate - now; // Calcula la diferencia en milisegundos
-
-            // Si la cuenta regresiva ha terminado
-            if (distance < 0) {
+        
+            // --- Lógica de la cuenta regresiva y el mensaje ---
+        
+            // 1. Si ya estamos en el día del reencuentro (26 de marzo) PERO aún no es la hora exacta (20:00)
+            if (now >= startMeetingDay && now < finalMeetingTime) {
+                clearInterval(countdownInterval); // Detiene el contador (opcional, para que no siga actualizando los números)
+                countdownElement.style.display = 'none'; // Oculta los números de la cuenta regresiva
+                messageElement.style.display = 'block'; // Muestra el mensaje principal
+        
+                // Actualiza el texto del mensaje para indicar que es HOY y mostrar el enlace
+                messageElement.innerHTML = `¡Hoy es el día! ¡Nuestro reencuentro es a las 20:00! ❤️<br><a href="${meetingLinkElement.href}" target="_blank" style="color: #FFD700; text-decoration: none; font-size: 0.8em;">Ver lugar en el mapa</a>`;
+        
+                // Asegurarse de que el enlace se muestre (aunque ya lo hicimos con el innerHTML)
+                meetingLinkElement.style.display = 'inline'; // O 'block' si quieres que esté en su propia línea
+                return; // Salir de la función para no seguir calculando la cuenta regresiva
+            }
+        
+            // 2. Si la hora del reencuentro (20:00) ya pasó
+            if (now >= finalMeetingTime) {
                 clearInterval(countdownInterval); // Detiene el contador
                 countdownElement.style.display = 'none'; // Oculta los números
                 messageElement.style.display = 'block'; // Muestra el mensaje final
+        
+                // Actualiza el texto del mensaje final
+                messageElement.innerHTML = `¡Llegó el momento! ¡Ya es 26 de marzo a las 20:00! ¡Espero que todo salga hermoso! ❤️`;
+        
+                // Ocultar el enlace si ya pasó el momento del encuentro, o dejarlo si quieres que siga visible
+                if (meetingLinkElement) { // Verifica si el elemento existe antes de intentar ocultarlo
+                    meetingLinkElement.style.display = 'none'; // O 'inline' si quieres que siga ahí.
+                }
                 return;
             }
-
-            // Cálculos para días, horas, minutos y segundos
+        
+            // 3. Si aún no es el día del reencuentro, sigue la cuenta regresiva normal
+            const distance = finalMeetingTime - now; // Calcula la diferencia en milisegundos hasta las 20:00
+        
+            // Cálculos para días, horas, minutos y segundos (igual que antes)
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // Actualiza el HTML con los nuevos valores, añadiendo un cero inicial si es necesario
+        
+            // Actualiza el HTML con los nuevos valores
             daysElement.textContent = String(days).padStart(2, '0');
             hoursElement.textContent = String(hours).padStart(2, '0');
             minutesElement.textContent = String(minutes).padStart(2, '0');
             secondsElement.textContent = String(seconds).padStart(2, '0');
         }
-
+        
         // Llama a updateCountdown cada segundo
         const countdownInterval = setInterval(updateCountdown, 1000);
-
+        
         // Llama a updateCountdown una vez al inicio para evitar un retardo de 1 segundo
         updateCountdown();
     </script>
