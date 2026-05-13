@@ -3,90 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feliz Día de la Enfermera</title>
+    <title>Día de la Enfermera</title>
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --background-color: #f4f7f6;
-            --card-bg: #ffffff;
-            --text-color: #333333;
+            --pink-light: #fff0f3;
+            --pink-medium: #ff8fa3;
+            --pink-dark: #ff4d6d;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--background-color);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #ffb3c1, #ff8fa3);
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            color: var(--text-color);
+            overflow: hidden;
+            position: relative;
         }
 
+        /* Animación de fondo: partículas */
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            bottom: -50px;
+            animation: float 10s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Tarjeta principal */
         .card {
-            background-color: var(--card-bg);
-            max-width: 500px;
-            width: 90%;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
             text-align: center;
-            border-top: 5px solid var(--secondary-color);
+            width: 350px;
+            z-index: 10;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .icon {
-            font-size: 50px;
-            color: var(--secondary-color);
-            margin-bottom: 20px;
+            font-size: 3rem;
+            color: var(--pink-dark);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
         }
 
         h1 {
-            color: var(--primary-color);
-            font-size: 24px;
-            margin-bottom: 15px;
+            color: var(--pink-dark);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
         }
 
         p {
-            font-size: 16px;
-            line-height: 1.6;
-            color: #555555;
-            margin-bottom: 20px;
-        }
-
-        .divider {
-            height: 1px;
-            background-color: #eeeeee;
-            margin: 25px 0;
+            color: #444;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
         }
 
         .signature {
-            font-style: italic;
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-
-        @media (max-width: 480px) {
-            .card {
-                padding: 30px 20px;
-            }
+            font-weight: bold;
+            color: var(--pink-medium);
+            border-top: 1px solid var(--pink-light);
+            padding-top: 1rem;
         }
     </style>
 </head>
 <body>
 
+    <!-- Generación de partículas de fondo -->
+    <div class="particle" style="width: 20px; height: 20px; left: 10%; animation-duration: 8s;"></div>
+    <div class="particle" style="width: 40px; height: 40px; left: 30%; animation-duration: 12s; animation-delay: 2s;"></div>
+    <div class="particle" style="width: 15px; height: 15px; left: 70%; animation-duration: 10s; animation-delay: 4s;"></div>
+    <div class="particle" style="width: 30px; height: 30px; left: 85%; animation-duration: 15s; animation-delay: 1s;"></div>
+    <div class="particle" style="width: 25px; height: 25px; left: 50%; animation-duration: 9s; animation-delay: 5s;"></div>
+
     <div class="card">
-        <div class="icon">⚕️</div>
-        <h1>Feliz Día de la Enfermera</h1>
+        <div class="icon">♥</div>
+        <h1>¡Feliz Día!</h1>
         <p>
-            Tu dedicación, empatía y profesionalismo en el cuidado de los demás siempre han sido cualidades admirables. Es una labor que requiere una fortaleza y vocación excepcionales.
+            Reconozco tu gran vocación y compromiso como enfermera. <br><br>
+            Te estimo mucho y te deseo lo mejor.
         </p>
-        <p>
-            Aprovecho este día no solo para reconocer tu excelente trabajo en el ámbito de la salud, sino también para recordarte el gran estima que te tengo. Valoro mucho la persona que eres y los logros que sigues alcanzando.
-        </p>
-        <div class="divider"></div>
-        <p class="signature">Con mucho aprecio.</p>
+        <div class="signature">Con aprecio</div>
     </div>
 
 </body>
